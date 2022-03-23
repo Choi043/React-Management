@@ -20,7 +20,16 @@ class CustomerAdd extends React.Component {
         this.addCustomer()
             .then((response) => {
                 console.log(response.data);
+                this.props.stateRefresh();
             })
+        this.setState({
+            file: null,
+            userName: '',
+            birthday: '',
+            gender: '',
+            job: '',
+            fileName: ''
+        })
     }
 
     handlerFileChange = (e) => {
@@ -30,7 +39,7 @@ class CustomerAdd extends React.Component {
         })
     }
 
-    handleValueChange = (e) => {
+    handlerValueChange = (e) => {
         let nextState = {};
         nextState[e.target.name] = e.target.value
         this.setState(nextState);
@@ -59,11 +68,11 @@ class CustomerAdd extends React.Component {
         return (
             <form onSubmit={this.handlerFormSubmit}>
                 <h1>고객 추가</h1>
-                프로필 이미지: <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handlerFileChange}/><br/>
-                이름: <input type="text" name="userNamne" value={this.state.userName} onChange={this.handlerValueChange}/><br/>
-                생년월일: <input type="text" name="birthday" value={this.state.birthday} onChange={this.handlerValueChange}/><br/>
-                성별: <input type="text" name="gender" value={this.state.gender} onChange={this.handlerValueChange}/><br/>
-                직업: <input type="text" name="job" value={this.state.job} onChange={this.handlerValueChange}/><br/>
+                프로필 이미지: <input type="file" name="file" file={this.state.file} value={this.state.fileName} onChange={this.handlerFileChange} /><br />
+                이름: <input type="text" name="userName" value={this.state.userName} onChange={this.handlerValueChange} /><br />
+                생년월일: <input type="text" name="birthday" value={this.state.birthday} onChange={this.handlerValueChange} /><br />
+                성별: <input type="text" name="gender" value={this.state.gender} onChange={this.handlerValueChange} /><br />
+                직업: <input type="text" name="job" value={this.state.job} onChange={this.handlerValueChange} /><br />
                 <button type="submit">추가하기</button>
             </form>
         )
